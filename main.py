@@ -3,13 +3,14 @@ import os
 
 while True:
     photo_name = input('輸入要下載的關鍵字： ')
-    download_pic = int(input('輸入要下載的圖片數量： '))
-    photo_list = m.get_photolist(photo_name, download_pic)
+    download_num = int(input('輸入要下載的圖片數量： '))
+    photo_list = m.get_photolist(photo_name, download_num)
+
 
     if photo_list == None:
         print('找不到圖片， 請換一個關鍵字再試試看')
     else:
-        if len(photo_list) < download_pic:
+        if len(photo_list) < download_num:
             print(f'只有找到{len(photo_list)}張')
         else:
             print('已取得所有圖片連結')

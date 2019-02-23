@@ -53,12 +53,18 @@ def get_photolist(photo_name, download_num):
         bsObj = bs(html.text, 'lxml')
         scope = bsObj.find_all('div', {'class': 'item'})
 
+        if len(scope) == 0:
+            return None
         for i in scope:
             lazy = i.find('img')
             if lazy['src'] != '/static/img/blank.gif':
-                photo_list.append(lazy['src'])
+                if lazy['src'] in photo_list:
+                    return photo_list
+                else:
+                    photo_list.append(lazy['src'])
             else:
                 photo_list.append(lazy['data-lazy'])
+
 
             if len(photo_list) >= download_num:
                 return photo_list
